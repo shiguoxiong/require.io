@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .content{
+            width:400px;
+            height:30px;
+            border:1px solid #ccc;
+            border-radius: 8px;
+            position:relative;
+        }
+        .content .bar{
+            position:relative;
+            left:0;top:0;
+            width:40px;
+            height:100%;
+            background: blue;
+            border-radius: 2px;
+        }
+        .content .progress{
+    position:  absolute;
+            left:0;
+            top:0;
+            width:0;
+            height:100%;
+            background: red;
+        }
+        .text{
+            position: absolute;
+            left:0;
+            top:30px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="content">
+    <div class="bar">
+        <div class="text">0%</div>
+    </div>
+
+    <div class="progress">
+
+    </div>
+
+</div>
+<div id="box">
+   <br/>
+   <br/>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>4</button>
+</div>
+
+<script>
+    var content=document.querySelector('.content')
+    var bar=document.querySelector('.bar')
+    var pre=document.querySelector('.progress')
+    var text=document.querySelector('.text')
+
+    content.onmousedown=function(event){
+        var that=event.offsetX
+        console.log(that/400)
+        bar.style.left=that+'px'
+        pre.style.width=that+'px',
+                text.innerText=(that/400)*100+'%';
+
+
+//        content.onmouseup=function(){
+//            content.onmousedown='false'
+//        }
+    }
+    bar.onmousedown=function(){
+        bar.onmousemove=function(event){
+            bar.style.left=event.offsetX+bar.offsetLeft+'px'
+            pre.style.width=event.offsetX+bar.offsetLeft+'px'
+        }
+    }
+</script>
+<script>
+    var fullname = 'John Doe';
+    var obj = {
+        fullname: 'Colin Ihrig',
+        prop: {
+            fullname: 'Aurelio De Rosa',
+            getFullname: function() {
+                return this.fullname;
+            }
+        }
+    };
+
+    console.log(obj.prop.getFullname());
+
+    var test = obj.prop.getFullname;
+    console.log(test.call(obj.prop));
+    console.log(test());
+</script>
+<script>
+    var a=[1,2,3]
+    console.log(a instanceof Number)
+    var nodes = document.getElementsByTagName('button');
+    var box = document.getElementById('box')
+    for (var i = 0; i < nodes.length; i++) {
+        nodes[i].addEventListener('click',(function() {
+            console.log('You clicked element #' + i);
+        })(i));
+    }
+//    box.addEventListener('click',function(e){
+//        console.log(e.target.innerText)
+//    })
+</script>
+</body>
+</html>
